@@ -4,7 +4,7 @@ Application Windows de gestion DJ : Tag Studio, MusicGenre, RekordSync et transf
 
 **État : 5.0 RC R10, non signée.** La validation stable n'est pas autorisée. Aucun partenariat ou agrément AlphaTheta/Pioneer DJ/Serato n'est revendiqué.
 
-Cette copie est une préparation locale à relire avant publication. Le compte du mainteneur, la confirmation de titularité et les liens publics restent à compléter dans GOVERNANCE.md. Le compte GitHub tiikonic420 est déclaré créé ; aucun dépôt public ni candidature SignPath n'existe encore.
+Ce dépôt privé est une préparation à relire avant toute ouverture publique. Le compte du mainteneur, la confirmation de titularité et les liens publics restent à compléter dans GOVERNANCE.md. L’accès GitHub au compte tiikonic420 et à ce dépôt privé est vérifié ; aucune candidature SignPath n’est envoyée.
 
 ## Licence
 

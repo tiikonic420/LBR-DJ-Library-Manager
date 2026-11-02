@@ -15,3 +15,4 @@ id_rsa*
 Profil_fictif/
 backups/
 .ci-temp/
+.ci-logs/

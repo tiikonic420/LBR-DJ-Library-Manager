@@ -1,6 +1,13 @@
 name: Windows validation and unsigned RC build
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'Sources_application/**'
+      - 'Tests/**'
+      - 'Build/**'
+      - '.github/workflows/validation-windows.yml'
 permissions:
   contents: read
 jobs:
@@ -19,6 +26,9 @@ jobs:
         with:
           python-version: '3.13.16'
           architecture: x64
+      - name: Provision the hash-verified audio test tool
+        shell: pwsh
+        run: ./Build/prepare_ci_tools.ps1
       - name: Require the documented Windows build tools
         shell: pwsh
         run: |
@@ -32,6 +42,13 @@ jobs:
           foreach ($name in @('TMP','TEMP','TMPDIR')) { Add-Content -LiteralPath $env:GITHUB_ENV -Value ($name+'='+$scratch) }
           ffmpeg -version
           if ($LASTEXITCODE -ne 0) { throw 'FFmpeg failed' }
+          python -c 'import sys; assert sys.version_info[:3]==(3,13,16), sys.version'
+          if ($LASTEXITCODE -ne 0) { throw 'Python 3.13.16 is required' }
+          python -m venv .build-windows/venv313
+          if ($LASTEXITCODE -ne 0) { throw 'Could not create the isolated build interpreter' }
+      - name: Inventory available MSI validation tools without claiming ICE success
+        shell: pwsh
+        run: ./Build/probe_ci_validation_tools.ps1
       - name: Build from source and run the existing assertions
         shell: pwsh
         run: ./Build/build_windows.ps1 -AllowDownloads -CompileMsi
@@ -49,7 +66,9 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: windows-validation-logs
-          path: .build-windows/validation-sources/
+          path: |
+            .build-windows/validation-sources/
+            .ci-logs/
           if-no-files-found: warn
           retention-days: 14
       - name: Store unsigned build for review, never publish automatically

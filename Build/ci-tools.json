@@ -1,0 +1,8 @@
+{
+  "python": "3.13.16",
+  "ffmpeg_version": "9.0.2",
+  "ffmpeg_url": "https://github.com/GyanD/codexffmpeg/releases/download/9.0.2/ffmpeg-9.0.2-full_build.zip",
+  "ffmpeg_archive_sha256": "759d0a9831c436a0eb331ad36f236c06cb04aaa0005da46571f0e9d3d9206f6b",
+  "ffmpeg_executable": "ffmpeg-9.0.2-full_build/bin/ffmpeg.exe",
+  "source_manifest": "https://github.com/microsoft/winget-pkgs/blob/master/manifests/g/Gyan/FFmpeg/9.0.2/Gyan.FFmpeg.installer.yaml"
+}
