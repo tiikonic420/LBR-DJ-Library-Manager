@@ -1,27 +1,27 @@
 # LBR DJ Library Manager
 
-Application Windows de gestion DJ : Tag Studio, MusicGenre, RekordSync et transfert Rekordbox vers Serato. Elle propose édition des métadonnées/pochettes, glisser-déposer audio et un espace Bibliothèque et sécurité facultatif avec sauvegardes et contrôles d'intégrité.
+Application Windows pour Tag Studio, MusicGenre, RekordSync et transfert Rekordbox vers Serato. Édition des métadonnées et pochettes, glisser-déposer audio, sauvegardes, restauration et contrôles d'intégrité dans un espace Bibliothèque et sécurité facultatif.
 
-**État : 5.0 RC R10, non signée.** La validation stable n'est pas autorisée. Aucun partenariat ou agrément AlphaTheta/Pioneer DJ/Serato n'est revendiqué.
+**5.0 RC R10 — candidate non signée, validation stable non autorisée.** Utiliser exclusivement des fichiers et bibliothèques fictifs pour la campagne de validation. LBR est indépendant d'AlphaTheta/Pioneer DJ et de Serato, sans agrément revendiqué.
 
-Ce dépôt privé est une préparation à relire avant toute ouverture publique. Le compte du mainteneur, la confirmation de titularité et les liens publics restent à compléter dans GOVERNANCE.md. L’accès GitHub au compte tiikonic420 et à ce dépôt privé est vérifié ; aucune candidature SignPath n’est envoyée.
+## Installation et désinstallation
 
-## Licence
+La première préversion sera fournie depuis la page [Releases](https://github.com/tiikonic420/LBR-DJ-Library-Manager/releases) une fois publiée ; aucune disponibilité n'est revendiquée avant cette publication. Télécharger le paquet complet avec notices et sources, extraire son contenu puis ouvrir le MSI. Le paquet est destiné à Windows 11 x64 et s'installe pour l'utilisateur courant. Désinstaller depuis Paramètres Windows → Applications → Applications installées. Les sauvegardes du profil utilisateur doivent rester conservées. Ne pas désactiver les protections si Windows bloque le lancement.
 
-Option choisie pour la préparation du code original LBR : GNU GPL version 3 ou, à votre choix, toute version ultérieure (SPDX: GPL-3.0-or-later). Voir LICENSE et LICENSING.md. Les bibliothèques tierces conservent leurs propres licences. L'autorisation de publier les éléments originaux doit être confirmée par leur titulaire avant diffusion publique.
+Lire [le guide](Documentation/GUIDE_UTILISATEUR.md), [les résultats](Documentation/ESSAI_MSI_GITHUB.md) et [les contrôles restants](Documentation/ETAT_VALIDATION.md). Le parcours PC sur données fictives passe ; le lancement non signé reste bloqué dans Sandbox. ICE exhaustif et intégrations DJ externes restent ouverts.
 
-## Installation et validation
+## Licence et sources
 
-La candidate MSI/portable est destinée à des essais sur des données fictives. Le paquet n'est pas actuellement disponible depuis ce dépôt préparatoire. Lire Documentation/ETAT_VALIDATION.md et Documentation/GUIDE_UTILISATEUR.md.
+Le code et les éléments originaux sont sous GPL-3.0-or-later, selon la déclaration du mainteneur. Les composants tiers gardent leurs licences. Voir [LICENSE](LICENSE), [LICENSING.md](LICENSING.md), [la revue](Documentation/REVUE_LICENCES.md) et Licences. Les sources, tests et scripts de construction sont dans ce dépôt. L'archive de sources accompagne le paquet publié.
 
 ## Construction Windows
 
-Le code et les tests sont dans ce dépôt ; Build/build_windows.ps1 prépare le runtime puis le MSI. Le téléchargement des dépendances est explicite avec -AllowDownloads ; -CompileMsi utilise le constructeur MSI natif. NSIS n'est pas utilisé pour cette candidature. Voir Documentation/BUILD_PUBLIC.md. Le modèle GitHub Actions doit encore être exécuté et qualifié ; aucun résultat distant n'est annoncé.
+Le [build Windows](Documentation/BUILD_PUBLIC.md) utilise Python 3.13 et le constructeur MSI natif. Le run GitHub [41406418487](https://github.com/tiikonic420/LBR-DJ-Library-Manager/actions/runs/41406418487) réussit : 17 suites, 105 cas sans ignorés et six scénarios GUI supplémentaires. Les sept tests audio passent. Les ajouts documentaires et de notices ultérieurs ne changent pas l'identité du MSI déjà testé.
 
 ## Code signing policy
 
-Candidature SignPath Foundation en préparation, non envoyée et non acceptée. Les fichiers restent non signés. Voir CODE_SIGNING_POLICY.md et PRIVACY.md. La formule d'attribution SignPath figurant dans la politique décrit la procédure envisagée après acceptation, pas un service déjà accordé.
+La candidature gratuite SignPath Foundation est préparée, non envoyée et non acceptée. Aucune signature ni approbation SignPath n'est revendiquée. Voir [Code signing policy](CODE_SIGNING_POLICY.md), [Privacy policy](PRIVACY.md) et [les rôles](GOVERNANCE.md). Après admission éventuelle seulement : Free code signing provided by SignPath.io, certificate by SignPath Foundation.
 
 ## Contributions et contact
 
-Les problèmes et contributions seront reçus via le futur dépôt public, après création du compte du mainteneur. Voir GOVERNANCE.md, CONTRIBUTING.md et SECURITY.md.
+Mainteneur : [tiikonic420](https://github.com/tiikonic420). Utiliser les issues pour les problèmes reproductibles avec données fictives, sans joindre de bibliothèque personnelle ni secret. Voir [CONTRIBUTING.md](CONTRIBUTING.md) et [SECURITY.md](SECURITY.md).

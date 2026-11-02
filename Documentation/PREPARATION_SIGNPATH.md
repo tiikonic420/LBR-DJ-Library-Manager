@@ -33,3 +33,7 @@ L'admission reste à l'appréciation de SignPath, notamment pour la réputation 
 ## Après une éventuelle admission
 
 Qualifier les règles de métadonnées et les artefacts SignPath : signer uniquement le lanceur LBR construit sur GitHub, intégrer celui-ci dans le MSI, signer ensuite le MSI, vérifier les signatures et actualiser les manifestes/archives. Ne pas signer les binaires Python et bibliothèques tierces comme des créations LBR. Rejouer les contrôles Windows/Sandbox, ICE et les intégrations DJ fictives avant de discuter une promotion stable.
+
+## Revue préalable à la publication — 2 novembre 2026
+
+Les trois rôles sont confirmés pour tiikonic420 : committer, relecteur et approbateur manuel. La revue technique des licences est consignée dans REVUE_LICENCES.md. Les notices complémentaires SQLCipher, OpenSSL, Expat, zlib et XZ ainsi que GPL LBR sont ajoutées aux sources ; elles ne modifient pas le MSI déjà compilé. Publier le paquet complet accompagné de ces notices et des sources. Le dépôt reste privé jusqu’à l’étape de publication réalisée par son propriétaire. Aucune demande SignPath envoyée.

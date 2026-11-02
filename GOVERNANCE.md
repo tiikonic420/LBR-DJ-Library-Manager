@@ -1,11 +1,19 @@
-# Mainteneur et approbations — à compléter
+# Mainteneur et responsabilités
 
-- Compte GitHub : tiikonic420 (déclaré par le mainteneur).
-- Droits sur le code et les images propres à LBR : le mainteneur confirme à sa connaissance le droit de publication sous GPL-3.0-or-later le 2 novembre 2026. Déclaration du mainteneur, sans vérification juridique indépendante ; licences tierces conservées.
-- Auteur/committer initial, relecteur des contributions externes et approbateur des signatures : tiikonic420 — attribution proposée à confirmer avant signature.
-- Si le projet est maintenu seul, ces rôles peuvent être déclarés comme tenus par la même personne ; ne pas inventer d'autres collaborateurs.
-- Authentification multifacteur : activée sur GitHub selon confirmation du mainteneur le 2 novembre 2026 ; à configurer sur SignPath si l'accès est accordé.
-- Toute signature de release exigera une approbation humaine explicite ; aucune signature ni publication ne sera déclenchée automatiquement sur une contribution externe.
-- Les modifications des scripts de construction et de CI nécessitent la même relecture que les modifications du logiciel.
+Le projet est maintenu par le compte GitHub [tiikonic420](https://github.com/tiikonic420).
 
-Aucune adresse personnelle, aucun mot de passe et aucune clé privée ne doivent être ajoutés au dépôt public.
+| Rôle | Responsable | Responsabilité |
+| --- | --- | --- |
+| Auteur / committer | tiikonic420 | Développement, maintenance et scripts de construction |
+| Relecteur | tiikonic420 | Revue des contributions externes, y compris scripts CI et dépendances |
+| Approbateur des signatures | tiikonic420 | Approbation humaine explicite de chaque demande de signature |
+
+Ces trois rôles ont été confirmés par le mainteneur le 2 novembre 2026. Aucun second relecteur indépendant n'est revendiqué. Les outils GPT assistent le développement mais ne détiennent aucun rôle de mainteneur ou d'approbateur.
+
+Le mainteneur confirme MFA activée sur GitHub. MFA sera également obligatoire sur SignPath si l'accès est accordé. Ne jamais partager les mots de passe, clés privées ou codes de récupération dans le dépôt.
+
+Le mainteneur déclare, à sa connaissance, pouvoir publier le code et les images propres à LBR sous GPL-3.0-or-later, en conservant les licences tierces. Cette déclaration du 2 novembre 2026 ne constitue pas un audit juridique indépendant et ne revendique aucun droit sur les composants tiers.
+
+Les contributions de personnes extérieures doivent être relues avant intégration. Chaque release devra être examinée puis sa signature approuvée manuellement. Aucun automatisme ne peut approuver une contribution ou une signature à la place du mainteneur.
+
+Contact public : issues du dépôt. Aucune donnée privée ni bibliothèque musicale ne doit être jointe à une issue.

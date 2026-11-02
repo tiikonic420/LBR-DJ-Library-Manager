@@ -36,3 +36,7 @@ Après une première restauration, un nouvel enregistrement fictif a modifié Es
 - Pour SignPath : liens actuellement privés, aucune release publique ni réputation publique établie revendiquée. Publication éventuelle et dépôt de candidature attendent une instruction distincte ; admission non garantie.
 
 Les journaux Windows bruts, chemins du PC et fichiers d'essai restent dans le dossier de preuves local, hors dépôt. Les moteurs, TaskHub, SQLite, les tests et leurs assertions sont inchangés. Aucun accès aux bibliothèques musicales personnelles dans ce parcours.
+
+## Revue préalable à la publication — 2 novembre 2026
+
+Les trois rôles sont confirmés pour tiikonic420 : committer, relecteur et approbateur manuel. La revue technique des licences est consignée dans REVUE_LICENCES.md. Les notices complémentaires SQLCipher, OpenSSL, Expat, zlib et XZ ainsi que GPL LBR sont ajoutées aux sources ; elles ne modifient pas le MSI déjà compilé. Publier le paquet complet accompagné de ces notices et des sources. Le dépôt reste privé jusqu’à l’étape de publication réalisée par son propriétaire. Aucune demande SignPath envoyée.

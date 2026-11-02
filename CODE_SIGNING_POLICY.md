@@ -10,7 +10,7 @@ Request signing only for our own launcher built from Build/Launcher.cs and our M
 
 The MSI must contain the signed launcher, not the earlier unsigned executable. Final manifests and portable archives must be generated after signing. SignPath artifact settings must enforce the allowed paths and reviewed product/version metadata. Current PE 5.0.10.1 and MSI 5.0.10 use different version formats; their mapping and product names require explicit agreement in the signing configuration before activation.
 
-Each release requires manual signing approval. Repository identity, roles and MFA are recorded in GOVERNANCE.md; they are not yet configured. No credentials or signing certificates are included in this repository.
+Each release requires manual signing approval. Committer, reviewer and manual signing approver: tiikonic420, confirmed on 2 November 2026. GitHub MFA enabled according to the maintainer; SignPath account roles and MFA will be configured only if admitted. See GOVERNANCE.md. No credentials or signing certificates are included in this repository.
 
 ## Privacy
 
