@@ -12,4 +12,4 @@ Un résumé public ne doit pas contenir les journaux Windows bruts du PC du main
 
 ## Qualification du dépôt privé
 
-Le run GitHub https://github.com/tiikonic420/LBR-DJ-Library-Manager/actions/runs/41406418487 passe les 17 suites avec 105 cas unittest sans ignorés et construit un MSI non signé. Les sources applicatives sont inchangées. Ce paquet CI reste à essayer en installation/Sandbox ; cette réussite ne lève pas le blocage de signature de la R10 ni les contrôles ICE et DJ externes.
+Le run GitHub https://github.com/tiikonic420/LBR-DJ-Library-Manager/actions/runs/41406418487 passe les 17 suites avec 105 cas unittest sans ignorés et construit un MSI non signé. Les sources applicatives sont inchangées. Ce paquet CI a maintenant été essayé sur le PC du mainteneur et dans Sandbox ; voir ESSAI_MSI_GITHUB.md. Installation, GUI avec glisser-déposer, sauvegarde/restauration et désinstallation passent sur le PC. Dans Sandbox, installation, intégrité, sauvegarde/restauration via modules et désinstallation passent ; le lancement reste bloqué par erreur 4551. Les contrôles ICE et DJ externes restent ouverts.

@@ -18,7 +18,7 @@ Les ajouts documentaires ultérieurs ne constituent pas une nouvelle compilation
 
 Le premier essai GitHub, run 41406158325, a échoué avant les tests LBR dans le script de préparation FFmpeg (lecture du code retour après un pipeline interrompu). Le script de CI a été corrigé ; le journal initial et celui du succès sont conservés. Aucune assertion produit n'a été affaiblie. Les deux cas initialement ignorés sur le PC local passent aussi dans ce run GitHub ; les anciens journaux de skips ne sont pas effacés.
 
-Ce MSI CI est une nouvelle compilation : sa documentation et certaines métadonnées de construction diffèrent du MSI R10 précédemment essayé sur Windows 11. Son installation, son lancement et sa désinstallation n'ont pas été rejoués sur ce nouveau fichier. Le succès source/packaging ne constitue pas une validation complète de distribution.
+Ce MSI CI est une nouvelle compilation : sa documentation et certaines métadonnées de construction diffèrent du MSI R10 précédemment essayé sur Windows 11. Les essais du 2 novembre sont détaillés dans ESSAI_MSI_GITHUB.md : parcours GUI réussi sur le PC hôte et désinstallation avec conservation des 23 fichiers fictifs ; installation/désinstallation réussies dans Sandbox, mais lancement bloqué par erreur 4551. Le succès hôte ne valide pas la GUI dans Sandbox.
 
 L'inventaire du runner trouve darice.cub et smoke.exe WiX 3.14.1, mais pas Msival2. Aucune validation ICE exhaustive n'a été exécutée. Le programme smoke de WiX 3 supprime ICE33/ICE66 par défaut ; son existence ne permet pas de déclarer ces contrôles réussis.
 
@@ -26,7 +26,7 @@ L'inventaire du runner trouve darice.cub et smoke.exe WiX 3.14.1, mais pas Msiva
 
 Le texte de candidature est dans CANDIDATURE_SIGNPATH.md. Les liens sont encore privés et ne doivent pas être présentés comme des références publiques accessibles à SignPath. Ne pas soumettre le formulaire à ce stade.
 
-Avant une éventuelle demande : confirmer les droits sur les éléments originaux et les images, finaliser l'avis GPL-3.0-or-later et les notices tierces, confirmer MFA et rôles, puis obtenir l'instruction explicite du propriétaire pour une ouverture publique et une release RC. Aucun changement de visibilité n'est autorisé par cette préparation.
+Le 2 novembre 2026, le propriétaire confirme à sa connaissance les droits de publication du code et des images propres à LBR sous GPL-3.0-or-later, avec conservation des licences tierces, et confirme MFA activée sur GitHub. Ce sont ses déclarations, sans audit juridique indépendant. Avant une éventuelle demande : finaliser les obligations de redistribution et les rôles de signature, configurer MFA sur SignPath si l'accès est accordé, puis obtenir l'instruction explicite du propriétaire pour une ouverture publique et une release RC. Aucun changement de visibilité n'est autorisé par cette préparation.
 
 L'admission reste à l'appréciation de SignPath, notamment pour la réputation publique d'un projet nouvellement créé. Une signature éventuelle apparaîtrait sous le nom du titulaire de leur certificat, SignPath Foundation. Aucun utilisateur, historique public ou soutien externe n'est inventé.
 
