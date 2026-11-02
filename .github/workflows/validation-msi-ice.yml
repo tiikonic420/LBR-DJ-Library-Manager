@@ -1,0 +1,67 @@
+name: Full Microsoft ICE validation of published R10 MSI
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/validation-msi-ice.yml
+      - Tools/Validation/RunFullIce.cs
+      - Tools/Validation/ice_summary.py
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: 3.13.16
+      - name: Download immutable reviewed inputs
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          New-Item -ItemType Directory .ice,.ice/tools,.ice/results,.ice/results/temp -Force | Out-Null
+          Invoke-WebRequest 'https://github.com/tiikonic420/LBR-DJ-Library-Manager/releases/download/v5.0.0-rc10/LBR_5.0_RC_R10_PAQUET_COMPLET_NON_SIGNE.zip' -OutFile .ice/package.zip
+          if ((Get-FileHash .ice/package.zip).Hash.ToLowerInvariant() -ne '6397ee5676aac05fbbc5fc9e62800db82c09b4ee6399e4b7b9f152637a3ebcee') { throw 'Published package SHA mismatch' }
+          Expand-Archive .ice/package.zip .ice/package
+          $Msi=Resolve-Path '.ice/package/LBR_DJ_Library_Manager_5.0_RC_R10_Setup.msi'
+          if ((Get-FileHash $Msi).Hash.ToLowerInvariant() -ne '86dceabb773f6d8d601b3dcbc56d1dfacf40dead517deb8b4ca87e5fe6a00228') { throw 'MSI SHA mismatch' }
+          Invoke-WebRequest 'https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314-binaries.zip' -OutFile .ice/wix.zip
+          if ((Get-FileHash .ice/wix.zip).Hash.ToLowerInvariant() -ne '6ac824e1642d6f7277d0ed7ea09411a508f6116ba6fae0aa5f2c7daa2ff43d31') { throw 'WiX archive SHA mismatch' }
+          Expand-Archive .ice/wix.zip .ice/tools
+          if ((Get-FileHash .ice/tools/darice.cub).Hash.ToLowerInvariant() -ne '4b2448832dddcd59fa3881524e0052e2502b47a03684361e889143cf95b91a18') { throw 'Cube SHA mismatch' }
+          Get-ChildItem .ice/tools -File | Where-Object Name -in @('wix.dll','winterop.dll','darice.cub') | Get-FileHash | ConvertTo-Json | Set-Content .ice/results/tool_hashes.json
+      - name: Run every ICE from the unmodified Microsoft cube without suppressions
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          $Tools=(Resolve-Path '.ice/tools').Path
+          $Source=(Resolve-Path 'Tools/Validation/RunFullIce.cs').Path
+          & "$env:WINDIR/Microsoft.NET/Framework/v4.0.30319/csc.exe" /nologo /platform:x86 /target:exe "/reference:$Tools/wix.dll" "/out:$Tools/RunFullIce.exe" $Source
+          if ($LASTEXITCODE -ne 0) { throw 'Validation harness compilation failed' }
+          $Msi=(Resolve-Path '.ice/package/LBR_DJ_Library_Manager_5.0_RC_R10_Setup.msi').Path
+          $Results=(Resolve-Path '.ice/results').Path
+          & "$Tools/RunFullIce.exe" $Msi "$Tools/darice.cub" "$Results/temp" "$Results/windows_installer_full.log" 2>&1 | Out-File "$Results/ice_raw.log" -Encoding utf8
+          $IceCode=$LASTEXITCODE
+          @{validator_exit=$IceCode;input_sha256=(Get-FileHash $Msi).Hash;suppressed_ICEs=@()} | ConvertTo-Json | Set-Content "$Results/execution.json"
+          python Tools/Validation/ice_summary.py $Results
+          $SummaryCode=$LASTEXITCODE
+          if ($IceCode -ne 0 -or $SummaryCode -ne 0) { throw "ICE unsuccessful or incomplete: validator=$IceCode summary=$SummaryCode" }
+      - name: Preserve complete ICE evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: R10-full-ICE-evidence
+          path: .ice/results/*.log
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Preserve structured coverage and input metadata
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: R10-full-ICE-summary
+          path: .ice/results/*.json
+          if-no-files-found: warn
+          retention-days: 30
