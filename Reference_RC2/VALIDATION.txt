@@ -1,0 +1,13 @@
+STUDIO 2.1.1 — VALIDATION
+Comparaison locale sous Linux / Tk 8.6, 8 transitions par scénario,
+fenêtre 1366x768, pages chargées. Temps médians incluant le traitement
+des callbacks et le rendu des tâches inactives (hors attente volontaire).
+Changement de page : 18.48 ms -> 5.15 ms.
+Changement de thème : 572.35 ms -> 505.96 ms.
+Ces mesures varient selon la machine ; elles ne prédisent pas les temps Windows.
+Le gain sur les thèmes est plus modeste que celui sur la navigation.
+Aucun nouveau redimensionnement de bannière pendant les transitions à taille fixe.
+Navigation, les deux thèmes, redimensionnement 980x600, conservation des saisies,
+journal repliable et onglets Paramètres : essais réussis, sans erreur de callback.
+Trois moteurs identiques octet pour octet au ZIP de référence Studio 2.1.
+Les synchronisations réelles n'ont pas été réexécutées ici.

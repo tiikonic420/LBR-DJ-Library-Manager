@@ -1,0 +1,11 @@
+COMPOSANTS TIERS
+Les licences originales sont conservées dans ce dossier et dans les paquets
+sous _internal/python/Lib/site-packages. Les sources Python de l’application
+se trouvent dans _internal/app. rbsync est livré à la révision identifiée dans
+VERSIONS.json avec ses sources. Mutagen est distribué sous GPL ; ses sources
+et son texte de licence sont fournis. Les fichiers sources des modules Python
+purs (dont bidict) sont directement inclus dans le runtime.
+
+LBR DJ Library Manager est une application tierce indépendante. Elle n’est
+ni éditée ni approuvée par AlphaTheta/Pioneer DJ ou Serato.
+Les noms de logiciels tiers désignent leur compatibilité visée.

@@ -1,0 +1,21 @@
+{
+  "passed": 14,
+  "checks": [
+    "all_four_controllers_open",
+    "pages_reused",
+    "visible_and_hidden_pages_follow_palette",
+    "10000_rows_loaded",
+    "navigation_during_population",
+    "heartbeat_during_load",
+    "pending_row_value",
+    "editor_updates_on_mutation",
+    "filtered_pending_edit",
+    "invalidated_search_after_clear",
+    "all_rows_restored",
+    "new_widget_palette",
+    "dynamic_widget_palette_change",
+    "no_callback_or_worker_errors"
+  ],
+  "errors": [],
+  "platform": "win32"
+}

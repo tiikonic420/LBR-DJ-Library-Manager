@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.build-windows/
+Distribution/
+Results/
+*.log
+.env
+.env.*
+*.pfx
+*.p12
+*.key
+id_rsa*
+Profil_fictif/
+backups/
+.ci-temp/

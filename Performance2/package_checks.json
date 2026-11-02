@@ -1,0 +1,18 @@
+{
+  "version": "PERFORMANCE 2.1",
+  "windows_final_executed": false,
+  "functional_passed": 45,
+  "visual_views_passed": 16,
+  "visual_cases": 400,
+  "visual_old_windows_cause": "Undetermined: no old captures supplied",
+  "application_changes": [],
+  "benchmarks_complete_and_workers_joined": 8,
+  "Sources_application_unchanged_files": 18,
+  "_internal/app_unchanged_files": 18,
+  "_internal/python_unchanged_files": 3593,
+  "launcher_and_batch_files_unchanged": true,
+  "LBR_DJ_Library_Manager_RC2_PERFORMANCE_2_WINDOWS.zip_sha256": "c0fcb73f26d099b65c041a271471808063efa2f2384678d9998e9ff9aa6255f4",
+  "upload/LBR_DJ_Library_Manager_RC2_PERFORMANCE_1.zip_sha256": "aa878b612c0f227f2c18bda31c154f580af0d9523010e2e5579f537e662ea282",
+  "input_results_sha256": "a5d4e72953869fb6b6862f64c0d5d7baf5f181668daca8e259e5bcf7f8f90eda",
+  "source_scripts_utf8_syntax": true
+}

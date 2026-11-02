@@ -25,4 +25,3 @@ Candidature SignPath Foundation en préparation, non envoyée et non acceptée. 
 ## Contributions et contact
 
 Les problèmes et contributions seront reçus via le futur dépôt public, après création du compte du mainteneur. Voir GOVERNANCE.md, CONTRIBUTING.md et SECURITY.md.
-

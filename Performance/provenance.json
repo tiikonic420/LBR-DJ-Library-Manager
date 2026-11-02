@@ -1,0 +1,23 @@
+{
+  "original_zip_sha256": "76e14e95507005daf93834dfaec6f796496a8abaa228188381c520fd3a5d0b60",
+  "source_sha256": {
+    "design_system.py": "6ac56d81661372cdaaefcf70e8bbd9d17b0087d261fb25391daf29596a93e74e",
+    "task_hub.py": "8f7c74853172b488b31838d4bebccb69ddf6e3d69b2aa8322f3a22057b0afbe2",
+    "requirements.txt": "8ae52c81c6908761b3e3b8f779e13a27d5dbc20b718a96b4f3e9e7f0894d5758",
+    "start.pyw": "dd3031526c5a50001a3252fdc00eaeb98b7d55ac5791d32275b2cc099392f49f",
+    "diagnostics.py": "a542447f6b9b0066bdbbafb9eb352b6f0e50156964ca8fe4abb550c32958c6d9",
+    "manager_core.py": "cd89b515e56232c73f2b7554524473d41b691b4d49cbff10756f9e4f77950f31",
+    "integrated_ui.py": "afda7b490326cb13b841dace120f94c411ee60e58632cbfa117d4b544964219a",
+    "LBR_DJ_Library_Manager_FINAL.py": "4b02465d1b779c39abd4ed729f136cbbbd04fd384e9efa5d90acf2596ee6aeee",
+    "dashboard.py": "3f0a150784ad09058c72411319ab008176d6e52e8f0ee9818e6d9985614aba29",
+    "rbsync_entry.py": "fc6aaae0cb811be5ed3ada3b5f9db4fd14d158c792138514e28406774b8a6bdf",
+    "modules/rekordsync_v5_0_6.py": "4dca24feb706df46cbe6701ff27640b1fd337babdaf552a9380115e52212e0b1",
+    "modules/musicgenre_v2.py": "79b9afa3f40d6614290f1680ed0c8c8a42e2e9a15614081f1944c57c54d97492",
+    "modules/rekordbox_serato_v1_4.py": "cf9662426610b874ce30386fbbf7a83ae3ff143fa8aea5667e362826a3855d62",
+    "modules/tag_studio.py": "84ed327d1708a0848ae9bf0e57a21d6e6ce1b1a9ebab1916623060dbdf7651b1",
+    "modules/tag_engine.py": "7a3dc1a11e067a082a7fb084a198c1b4fbd01ed0b83305901a7c9f5fa1956f02",
+    "assets/lbr.ico": "898a9b5af53fee59391a5234aaa31d5896e8db9c7ad0f91731ef9901eb4e6cdb",
+    "assets/creation.txt": "427aee8852b20d5bdf94272298336970966fb0c1a56f0304fa373157517edd84",
+    "assets/dj_banner.png": "f12465520a8357c830eaab6dceed40d4a1e8bee9cf3150e6726dbeba01c949c1"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "source_payload_equal": true,
+  "unchanged_runtime_files": 3593,
+  "original_archive_and_extracted_files_intact": true,
+  "syntax_checked_files": 18,
+  "launcher_machine": "0x8664",
+  "python_machine": "0x8664",
+  "windows_executed": false,
+  "gui_checks": 14
+}

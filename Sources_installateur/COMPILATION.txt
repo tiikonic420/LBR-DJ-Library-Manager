@@ -1,0 +1,20 @@
+CONSTRUCTION
+Outils : MinGW-w64 GCC 13 et NSIS 3.08 (ou version compatible).
+Lanceur :
+x86_64-w64-mingw32-windres launcher.rc -O coff -o launcher.res
+x86_64-w64-mingw32-gcc -municode -mwindows -static -Os -s launcher.c launcher.res -o LBR_DJ_Library_Manager.exe
+
+Pour reconstruire l’installateur, copie le dossier installé (sans Desinstaller.exe)
+dans un sous-dossier payload à côté de installer.nsi. Il doit contenir
+LBR_DJ_Library_Manager.exe, _internal, Documentation, Licences et VERSIONS.json.
+Remplace _internal/app par Sources_application si tu as modifié le code.
+Compile ensuite : makensis installer.nsi
+Le runtime Windows complet et les dépendances sont fournis dans l’installateur.
+Les versions et SHA-256 des wheels sont dans VERSIONS.json. La révision rbsync
+et ses sources sont fournies dans Licences, après installation.
+
+SIGNATURE
+Aucun certificat n’a été fourni. Ces exécutables ne sont pas signés.
+La signature finale devra être faite avec le certificat de l’éditeur et un
+horodatage adapté, puis suivie d’un nouveau calcul des empreintes SHA-256.
+Ne transmets jamais ta clé privée dans une conversation ou dans un paquet public.

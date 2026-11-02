@@ -1,0 +1,6 @@
+Bannière originale produite avec l'outil intégré ImageGen.
+Prompt : Photographic banner for LBR DJ Library Manager. Ultrawide cinematic
+photorealistic close-up of a premium black DJ controller, blue LED jog wheel
+and orange pads on the right half. Left half dark navy with negative space
+for live UI text. No text, logos or watermark. 3:1 aspect ratio.
+Le texte et les commandes de l'application sont de vrais éléments Tk.

@@ -1,0 +1,23 @@
+1 ICON "lbr.ico"
+1 VERSIONINFO
+FILEVERSION 4,0,0,2
+PRODUCTVERSION 4,0,0,2
+FILEOS 0x40004L
+FILETYPE 0x1L
+BEGIN
+ BLOCK "StringFileInfo"
+ BEGIN
+  BLOCK "040c04b0"
+  BEGIN
+   VALUE "CompanyName", "LBR Software"
+   VALUE "FileDescription", "LBR DJ Library Manager"
+   VALUE "FileVersion", "4.0.0.2"
+   VALUE "ProductName", "LBR DJ Library Manager Studio"
+   VALUE "ProductVersion", "4.0 RC2"
+  END
+ END
+ BLOCK "VarFileInfo"
+ BEGIN
+  VALUE "Translation", 0x040c, 1200
+ END
+END

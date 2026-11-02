@@ -1,0 +1,2 @@
+VERSION = '5.0 RC R10'
+STAGE = 50

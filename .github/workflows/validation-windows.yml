@@ -1,0 +1,61 @@
+name: Windows validation and unsigned RC build
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-and-build:
+    runs-on: windows-2025
+    timeout-minutes: 45
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONIOENCODING: utf-8
+      LBR_TEST_MODE: '1'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.13.16'
+          architecture: x64
+      - name: Require the documented Windows build tools
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          foreach ($name in @('py','makecab.exe','ffmpeg.exe')) {
+            if (-not (Get-Command $name -ErrorAction SilentlyContinue)) { throw "Missing prerequisite: $name. Provision an approved pinned tool; do not skip tests." }
+          }
+          if (-not (Test-Path "$env:WINDIR/Microsoft.NET/Framework64/v4.0.30319/csc.exe")) { throw 'csc.exe is missing' }
+          $scratch=Join-Path $env:GITHUB_WORKSPACE '.ci-temp'
+          New-Item -ItemType Directory -Path $scratch -Force | Out-Null
+          foreach ($name in @('TMP','TEMP','TMPDIR')) { Add-Content -LiteralPath $env:GITHUB_ENV -Value ($name+'='+$scratch) }
+          ffmpeg -version
+          if ($LASTEXITCODE -ne 0) { throw 'FFmpeg failed' }
+      - name: Build from source and run the existing assertions
+        shell: pwsh
+        run: ./Build/build_windows.ps1 -AllowDownloads -CompileMsi
+      - name: Require all suites and all seven audio tests
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          $rows=@(Get-Content .build-windows/validation-sources/summary.json -Raw | ConvertFrom-Json)
+          if ($rows.Count -ne 17 -or @($rows | Where-Object exit_code -ne 0).Count) { throw 'Incomplete or failed source validation' }
+          $audio=Get-Content .build-windows/validation-sources/audio_formats.log -Raw
+          if ($audio -notmatch 'Ran 7 tests' -or $audio -match '(?im)^FAILED\b|^ERROR:|^Traceback|^OK\s+\(skipped=|\.\.\.\s+skipped\b' -or $audio -notmatch '(?m)^OK\s*$') { throw 'Audio tests incomplete, skipped or failed' }
+          Get-ChildItem .build-windows/validation-sources/*.log | Select-String -Pattern 'skipped' | ForEach-Object { Write-Warning $_.Line }
+      - name: Preserve complete logs, including failed runs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: windows-validation-logs
+          path: .build-windows/validation-sources/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Store unsigned build for review, never publish automatically
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: LBR-R10-unsigned-review-only
+          path: Distribution/
+          if-no-files-found: error
+          retention-days: 14

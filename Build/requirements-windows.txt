@@ -1,0 +1,14 @@
+mutagen==1.48.1
+Pillow==12.3.0
+pyrekordbox==0.4.4
+SQLAlchemy==2.0.44
+construct==2.10.70
+bidict==0.24.1
+psutil==7.0.0
+python-dateutil==2.9.0.post0
+six==1.17.0
+greenlet==3.2.4
+numpy==2.2.6
+packaging==26.3
+typing_extensions==4.16.0
+sqlcipher3-wheels==0.5.7
