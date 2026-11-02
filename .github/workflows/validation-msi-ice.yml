@@ -8,6 +8,8 @@ on:
       - Tools/Validation/RunFullIce.cs
       - Tools/Validation/ice_summary.py
       - Tools/Validation/repair_msi_ice.py
+      - Tools/Validation/verify_msi_payload_ice.py
+      - Tools/Validation/test_ice_installation.py
 permissions:
   contents: read
 jobs:
@@ -75,6 +77,16 @@ jobs:
           python Tools/Validation/ice_summary.py $Results
           $SummaryCode=$LASTEXITCODE
           if ($IceCode -ne 0 -or $SummaryCode -ne 0) { throw "Corrected MSI still fails or incomplete: validator=$IceCode summary=$SummaryCode" }
+      - name: Verify immutable application payload and installation repair uninstall regressions
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          $Original=(Resolve-Path '.ice/package/LBR_DJ_Library_Manager_5.0_RC_R10_Setup.msi').Path
+          $Corrected=(Resolve-Path '.ice/corrected/LBR_R10_ICE1_REVIEW.msi').Path
+          python Tools/Validation/verify_msi_payload_ice.py $Original $Corrected (Resolve-Path 'Build/build_msi.py').Path (Join-Path $env:GITHUB_WORKSPACE '.ice/results/corrected/payload_verification.json')
+          if ($LASTEXITCODE -ne 0) { throw 'Application payload changed' }
+          python Tools/Validation/test_ice_installation.py $Corrected (Resolve-Path '.ice/package/LBR_DJ_Library_Manager_5.0_RC_R10_Setup.manifest.json').Path (Resolve-Path '.ice/results/corrected').Path
+          if ($LASTEXITCODE -ne 0) { throw 'Installer regressions failed' }
       - name: Preserve complete ICE evidence even on failure
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

@@ -44,10 +44,10 @@ covered={x[0] for x in rows('SELECT `DirProperty` FROM `RemoveFile` WHERE `FileN
 skip={'TARGETDIR','LocalAppDataFolder','ProgramMenuFolder','DesktopFolder','System64Folder'}
 for directory, in rows('SELECT `Directory` FROM `Directory`'):
     if directory not in covered|skip:db.row('RemoveFile',[m.identifier('RI',directory),'MenuShortcuts',None,directory,2])
-db.sql('UPDATE `File` SET `Attributes` = 16384')
+db.sql('UPDATE `File` SET `Attributes` = 512')
 # Fully authored standard MSI dialogs required by ICE20.
 db.row('Property',['ErrorDialog','SystemErrorDlg'])
-db.row('Dialog',['SystemErrorDlg',50,50,390,250,131,'LBR - Windows Installer','ErrorText',None,None])
+db.row('Dialog',['SystemErrorDlg',50,50,390,250,65539,'LBR - Windows Installer','ErrorText',None,None])
 db.row('Control',['SystemErrorDlg','ErrorText','Text',20,30,350,150,3,None,'[ErrorText]',None,None])
 for name,event,label in [('A','ErrorAbort','Abandonner'),('C','ErrorCancel','Annuler'),('I','ErrorIgnore','Ignorer'),('N','ErrorNo','Non'),('O','ErrorOk','OK'),('R','ErrorRetry','Reessayer'),('Y','ErrorYes','Oui')]:
     db.row('Control',['SystemErrorDlg',name,'PushButton',20,215,85,20,3,None,label,None,None]);db.row('ControlEvent',['SystemErrorDlg',name,'EndDialog',event,'1',1])
