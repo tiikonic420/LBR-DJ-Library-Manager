@@ -7,6 +7,7 @@ on:
       - .github/workflows/validation-msi-ice.yml
       - Tools/Validation/RunFullIce.cs
       - Tools/Validation/ice_summary.py
+      - Tools/Validation/repair_msi_ice.py
 permissions:
   contents: read
 jobs:
@@ -42,19 +43,43 @@ jobs:
           & "$env:WINDIR/Microsoft.NET/Framework/v4.0.30319/csc.exe" /nologo /platform:x86 /target:exe "/reference:$Tools/wix.dll" "/out:$Tools/RunFullIce.exe" $Source
           if ($LASTEXITCODE -ne 0) { throw 'Validation harness compilation failed' }
           $Msi=(Resolve-Path '.ice/package/LBR_DJ_Library_Manager_5.0_RC_R10_Setup.msi').Path
-          $Results=(Resolve-Path '.ice/results').Path
+          New-Item -ItemType Directory .ice/results/original/temp -Force | Out-Null
+          $Results=(Resolve-Path '.ice/results/original').Path
           & "$Tools/RunFullIce.exe" $Msi "$Tools/darice.cub" "$Results/temp" "$Results/windows_installer_full.log" 2>&1 | Out-File "$Results/ice_raw.log" -Encoding utf8
           $IceCode=$LASTEXITCODE
           @{validator_exit=$IceCode;input_sha256=(Get-FileHash $Msi).Hash;suppressed_ICEs=@()} | ConvertTo-Json | Set-Content "$Results/execution.json"
           python Tools/Validation/ice_summary.py $Results
           $SummaryCode=$LASTEXITCODE
-          if ($IceCode -ne 0 -or $SummaryCode -ne 0) { throw "ICE unsuccessful or incomplete: validator=$IceCode summary=$SummaryCode" }
+          $Coverage=Get-Content "$Results/ICE_SUMMARY.json" -Raw | ConvertFrom-Json
+          if (-not $Coverage.coverage_complete -or $IceCode -ne 2 -or $SummaryCode -ne 2) { throw 'Original package must reproduce its known ICE failures with full coverage' }
+      - name: Create isolated installer-only correction and validate every ICE again
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          $Tools=(Resolve-Path '.ice/tools').Path
+          $Assembly=[Reflection.Assembly]::LoadFrom("$Tools/wix.dll")
+          $Reader=[IO.StreamReader]::new($Assembly.GetManifestResourceStream('Microsoft.Tools.WindowsInstallerXml.Data.tables.xml'))
+          [IO.File]::WriteAllText("$Tools/wix_tables.xml",$Reader.ReadToEnd(),[Text.Encoding]::UTF8)
+          $Reader.Dispose()
+          New-Item -ItemType Directory .ice/corrected,.ice/results/corrected/temp -Force | Out-Null
+          $Original=(Resolve-Path '.ice/package/LBR_DJ_Library_Manager_5.0_RC_R10_Setup.msi').Path
+          $Corrected=Join-Path $env:GITHUB_WORKSPACE '.ice/corrected/LBR_R10_ICE1_REVIEW.msi'
+          python Tools/Validation/repair_msi_ice.py $Original $Corrected "$Tools/wix_tables.xml" (Resolve-Path 'Build/build_msi.py').Path
+          if ($LASTEXITCODE -ne 0) { throw 'MSI-only correction failed' }
+          Copy-Item .ice/corrected/*.json .ice/results/corrected
+          $Results=(Resolve-Path '.ice/results/corrected').Path
+          & "$Tools/RunFullIce.exe" $Corrected "$Tools/darice.cub" "$Results/temp" "$Results/windows_installer_full.log" 2>&1 | Out-File "$Results/ice_raw.log" -Encoding utf8
+          $IceCode=$LASTEXITCODE
+          @{validator_exit=$IceCode;input_sha256=(Get-FileHash $Corrected).Hash;suppressed_ICEs=@()} | ConvertTo-Json | Set-Content "$Results/execution.json"
+          python Tools/Validation/ice_summary.py $Results
+          $SummaryCode=$LASTEXITCODE
+          if ($IceCode -ne 0 -or $SummaryCode -ne 0) { throw "Corrected MSI still fails or incomplete: validator=$IceCode summary=$SummaryCode" }
       - name: Preserve complete ICE evidence even on failure
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: R10-full-ICE-evidence
-          path: .ice/results/*.log
+          path: .ice/results/**/*.log
           if-no-files-found: warn
           retention-days: 30
       - name: Preserve structured coverage and input metadata
@@ -62,6 +87,14 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: R10-full-ICE-summary
-          path: .ice/results/*.json
+          path: .ice/results/**/*.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Preserve isolated review candidate, never publish a release
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: R10-ICE1-installer-review-only
+          path: .ice/corrected/*
           if-no-files-found: warn
           retention-days: 30

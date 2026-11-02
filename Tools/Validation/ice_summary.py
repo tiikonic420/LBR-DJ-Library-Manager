@@ -7,6 +7,7 @@ native=b.decode('utf-16',errors='replace') if b[:2] in (b'\xff\xfe',b'\xfe\xff')
 expected=re.findall(r'^EXPECTED_ICE\t(ICE\d+)\s*$',raw,re.M)
 started=set(re.findall(r'(?:Doing action:|Action start[^\n:]*[^\n]*:)\s*(ICE\d+)\b',native))
 ended=dict(re.findall(r'Action ended[^\n]*?\b(ICE\d+)\.[^\n]*?Return value (\d+)',native))
+ended.update(dict(re.findall(r'Fin de l.action[^\n]*?\b(ICE\d+)\.[^\n]*?Valeur renvoy.e\s*:\s*(\d+)',native)))
 errors=[];warnings=[];failures=[]
 for line in raw.splitlines():
     if not line.startswith('ICE_RAW\t'):continue
