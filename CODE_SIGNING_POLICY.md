@@ -1,6 +1,6 @@
 # Code signing policy
 
-Status: application being prepared, not submitted, not approved. No LBR release has been signed by SignPath Foundation. A local Windows-tested unsigned RC exists; public repository and release links are not yet available.
+Status: free application submitted on 2 November 2026; the maintainer reports the receipt confirmation after completing the CAPTCHA. Admission pending, not approved. No LBR release has been signed by SignPath Foundation. The unsigned RC is publicly available at https://github.com/tiikonic420/LBR-DJ-Library-Manager/releases/tag/v5.0.0-rc10 . See Documentation/SUIVI_SIGNPATH.md for evidence and limits.
 
 Planned attribution, only if accepted: Free code signing provided by SignPath.io, certificate by SignPath Foundation.
 

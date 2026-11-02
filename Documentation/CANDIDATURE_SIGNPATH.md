@@ -1,4 +1,6 @@
-# SignPath application â€” draft, not submitted
+> Historical preparation document. Current status on 2 November 2026: repository and unsigned RC are public; application sent, receipt reported by the maintainer after CAPTCHA; admission pending. See [SUIVI_SIGNPATH.md](SUIVI_SIGNPATH.md). Earlier private/not-submitted statements below describe the preparation stage. Do not submit a duplicate application.
+
+# SignPath application — draft, not submitted
 
 PUBLICATION PREPARATION COMPLETE; NOT SUBMITTED. While the repository is private, the links below cannot serve as public application evidence. No application has been submitted. Public visibility and a public RC release require a later explicit owner instruction.
 
