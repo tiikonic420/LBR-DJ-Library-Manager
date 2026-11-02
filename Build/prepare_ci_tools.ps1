@@ -12,8 +12,10 @@ $Unpacked=Join-Path $Tools 'ffmpeg'
 if (-not (Test-Path -LiteralPath $Unpacked)) { Expand-Archive -LiteralPath $Archive -DestinationPath $Unpacked }
 $Exe=Join-Path $Unpacked $Config.ffmpeg_executable
 if (-not (Test-Path -LiteralPath $Exe)) { throw 'FFmpeg absent de l''archive verifiee.' }
-$Version=(& $Exe -version | Select-Object -First 1)
-if ($LASTEXITCODE -ne 0 -or $Version -notmatch '^ffmpeg version 9\.0\.2') { throw 'Version FFmpeg incorrecte.' }
+$VersionOutput=& $Exe -version
+$VersionExit=$LASTEXITCODE
+$Version=@($VersionOutput)[0]
+if ($VersionExit -ne 0 -or $Version -notmatch '^ffmpeg version 9\.0\.2') { throw 'Version FFmpeg incorrecte.' }
 Add-Content -LiteralPath $env:GITHUB_PATH -Value (Split-Path $Exe -Parent)
 $Log=Join-Path $env:GITHUB_WORKSPACE '.ci-logs'
 New-Item -ItemType Directory -Path $Log -Force | Out-Null
