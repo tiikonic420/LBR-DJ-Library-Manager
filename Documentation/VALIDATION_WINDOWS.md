@@ -1,3 +1,5 @@
+> Protocole historique conservé. Les anciennes mentions de construction NSIS et du lanceur réutilisé décrivent la livraison initiale ; le statut courant et la construction MSI R10 figurent dans ETAT_VALIDATION.md, BUILD_PUBLIC.md et PREPARATION_SIGNPATH.md. Aucun contrôle historique ne doit être présenté comme réexécuté sans preuve.
+
 # Validation finale Windows 11 — à exécuter
 
 Aucune de ces validations cibles n'est annoncée comme exécutée dans la livraison locale. Utiliser uniquement une copie fictive/isolée des bibliothèques, y compris pour Rekordbox et Serato. Les véritables bases et morceaux ne sont pas nécessaires à cette campagne.
