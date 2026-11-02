@@ -1,5 +1,7 @@
 # LBR DJ Library Manager
 
+> **Contrôle de distribution en échec :** les 104 ICE ont été exécutés sur le MSI R10 publié et révèlent des erreurs de construction. Une correction d’installateur distincte est en cours de qualification. Voir [le rapport ICE](Documentation/VALIDATION_ICE_R10.md). R10 reste une préversion, pas une version stable.
+
 Application Windows pour Tag Studio, MusicGenre, RekordSync et transfert Rekordbox vers Serato. Édition des métadonnées et pochettes, glisser-déposer audio, sauvegardes, restauration et contrôles d'intégrité dans un espace Bibliothèque et sécurité facultatif.
 
 **5.0 RC R10 — candidate non signée, validation stable non autorisée.** Utiliser exclusivement des fichiers et bibliothèques fictifs pour la campagne de validation. LBR est indépendant d'AlphaTheta/Pioneer DJ et de Serato, sans agrément revendiqué.

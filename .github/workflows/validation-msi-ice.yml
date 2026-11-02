@@ -34,7 +34,7 @@ jobs:
           Expand-Archive .ice/wix.zip .ice/tools
           if ((Get-FileHash .ice/tools/darice.cub).Hash.ToLowerInvariant() -ne '4b2448832dddcd59fa3881524e0052e2502b47a03684361e889143cf95b91a18') { throw 'Cube SHA mismatch' }
           Get-ChildItem .ice/tools -File | Where-Object Name -in @('wix.dll','winterop.dll','darice.cub') | Get-FileHash | ConvertTo-Json | Set-Content .ice/results/tool_hashes.json
-      - name: Run every ICE from the unmodified Microsoft cube without suppressions
+      - name: Reproduce original MSI failures and require full unfiltered ICE coverage
         shell: pwsh
         run: |
           $ErrorActionPreference='Stop'
@@ -52,6 +52,7 @@ jobs:
           $SummaryCode=$LASTEXITCODE
           $Coverage=Get-Content "$Results/ICE_SUMMARY.json" -Raw | ConvertFrom-Json
           if (-not $Coverage.coverage_complete -or $IceCode -ne 2 -or $SummaryCode -ne 2) { throw 'Original package must reproduce its known ICE failures with full coverage' }
+          exit 0
       - name: Create isolated installer-only correction and validate every ICE again
         shell: pwsh
         run: |
